@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config
+echo "LANG=en_US.utf-8" >> /etc/environment
+echo "LC_ALL=en_US.utf-8" >> /etc/environment
+
+echo "password123" | passwd root --stdin
+sed  -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+service sshd restart
+
+
+amazon-linux-extras install docker -y
+systemctl restart docker.service
+systemctl enable docker.service
+docker -a -G docker ec2-user
+
+docker swarm join --token SWMTKN-1-5nzfzamkd9hd8ha80zz3q66httkgo0y9wkh7e0cbcwj3nvqgom-8k42ywr5abh71o0ejv8d810os 172.31.41.35:2377
