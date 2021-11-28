@@ -9,7 +9,7 @@ Using ipstack API in this python application as a demo. This API will show you t
 ### Features
 - IP-Location finding website (Python) 
 - Easy to migrate everywhere 
-- Container load balanced (Nginx)
+- AWS ALB - load balanced
 - All containers are spin up with a single command
 
 ### Includes
